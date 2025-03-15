@@ -24,7 +24,7 @@ term_project/
 ```
 
 ## 🛤️ Pipeline Execution Order
-To execute the pipeline in the correct sequence, run the following scripts in order:
+Data Acquisition scripts can  be executed through main.py and Data Cleaing through run_processing.py
 
 ### 1️⃣ Data Acquisition (`src/acquisition/`)
 - **`kroger_api.py`** – Handles authentication and API requests for product and location data.
