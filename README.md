@@ -39,7 +39,8 @@ To execute the pipeline in the correct sequence, run the following scripts in or
 
 ### 3️⃣ Pipeline Execution (`src/`)
 - **`main.py`** – Orchestrates the full acquisition pipeline by executing the above scripts in sequence.
-  - Leverages GitHub  workflow actions for automation.   
+  - Leverages GitHub  workflow actions for automation.
+  - **NOTE**: Pipeline has been suspended due to data size issues. Data warehousing will need to migrate to BigQuery to support larger storage capacity.
 - **`run_processing.py`** – Runs the full data processing workflow, producing the final dataset.
 
 ## 📓 Jupyter Notebooks
