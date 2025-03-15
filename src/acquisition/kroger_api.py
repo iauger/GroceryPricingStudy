@@ -8,7 +8,7 @@ from datetime import datetime, timedelta
 
 # Set up directory paths
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))  # Get `src/acquisition/`
-DATA_DIR = os.path.join(BASE_DIR, "../data")  # Navigate to `src/data/`
+DATA_DIR = os.path.abspath(os.path.join(BASE_DIR, "..", "data"))  # Navigate to `src/data/`
 
 # Load environment variables
 ENV_FILE = os.path.join(DATA_DIR,"kroger_client_info.env")  # Define .env file path

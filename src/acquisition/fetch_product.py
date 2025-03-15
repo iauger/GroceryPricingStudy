@@ -3,9 +3,9 @@ import sys
 import time
 import pandas as pd
 import datetime
-from kroger_api import search_kroger_products
-from data_processing import filter_products, save_to_csv
-from tracking import update_tracker, update_log
+from acquisition.kroger_api import search_kroger_products
+from acquisition.data_processing import filter_products, save_to_csv
+from acquisition.tracking import update_tracker, update_log
 
 # Set up directory paths
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))  # Get `src/acquisition/`
