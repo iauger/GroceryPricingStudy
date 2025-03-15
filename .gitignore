@@ -21,7 +21,8 @@ __pycache__/
 data/*.csv
 data/*.json
 data/*.xlsx
-s r c / d a t a / 
+# Ignore all data except final dataset
+src/data/
 !git_data/final_dataset.csv
  
  

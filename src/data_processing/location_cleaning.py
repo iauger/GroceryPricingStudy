@@ -16,7 +16,7 @@ CLEANED_LOCATIONS_FILE = os.path.join(DATA_DIR, "cleaned_location_data.csv")
 # if not GMAPS_API_KEY:
 #     raise ValueError("Google Maps API Key is missing! Set it as an environment variable.")
 
-GOOGLE_API_KEY = "AIzaSyDRBpE236p2NPURBmuWEIZ1FlhYjb04dxk" 
+GOOGLE_API_KEY = "GOOGLE_MAPS_API_KEY" 
 gmaps = googlemaps.Client(key=GOOGLE_API_KEY)
 
 # Define data types
