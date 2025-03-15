@@ -2,6 +2,7 @@ import pandas as pd
 import os
 import googlemaps
 import time
+from dotenv import get_key, load_dotenv
 
 # Set up directory paths
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))  # Get `src/data_processing/`
@@ -11,10 +12,16 @@ DATA_DIR = os.path.join(BASE_DIR, "../data")  # Navigate to `src/data/`
 LOCATIONS_FILE = os.path.join(DATA_DIR, "kroger_locations.csv")
 CLEANED_LOCATIONS_FILE = os.path.join(DATA_DIR, "cleaned_location_data.csv")
 
-# # Load Google Maps API Key from environment
-# GMAPS_API_KEY = os.getenv("GOOGLE_MAPS_API_KEY")
-# if not GMAPS_API_KEY:
-#     raise ValueError("Google Maps API Key is missing! Set it as an environment variable.")
+# Load environment variables
+ENV_FILE = os.path.join(DATA_DIR,"kroger_client_info.env")  # Define .env file path
+
+load_dotenv()
+GOOGLE_MAPS_API_KEY = get_key(ENV_FILE, "GOOGLE_MAP_API_KEY")
+
+# Load Google Maps API Key from environment
+GMAPS_API_KEY = os.getenv("GOOGLE_MAPS_API_KEY")
+if not GMAPS_API_KEY:
+    raise ValueError("Google Maps API Key is missing! Set it as an environment variable.")
 
 GOOGLE_API_KEY = "GOOGLE_MAPS_API_KEY" 
 gmaps = googlemaps.Client(key=GOOGLE_API_KEY)
