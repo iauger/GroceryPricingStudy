@@ -1,0 +1,23 @@
+# Ignore system files
+AppData/
+Desktop/
+Downloads/
+OneDrive/
+Videos/
+NTUSER.*
+*.log
+*.ini
+
+# Ignore Python & Jupyter cache files
+__pycache__/
+*.ipynb_checkpoints/
+.anaconda/
+.conda/
+.matplotlib/
+.vscode/
+.jupyter/
+
+# Ignore raw data files (optional)
+data/*.csv
+data/*.json
+data/*.xlsx
