@@ -16,6 +16,7 @@ term_project/
 │── src/                   # Source code for data processing
 │   ├── acquisition/       # Scripts for retrieving external data
 │   ├── data_processing/   # Scripts for cleaning and merging data
+│   ├── data/              # Folder for holding some data files including final_dataset.csv
 │── notebooks/             # Jupyter notebooks for exploratory analysis
 │── git_data/              # Contains final processed dataset (not tracked in Git)
 │── .gitignore             # Ensures raw data files are not committed
