@@ -7,11 +7,16 @@ from kroger_api import search_kroger_products
 from data_processing import filter_products, save_to_csv
 from tracking import update_tracker, update_log
 
-# ✅ Set base directory dynamically
-BASE_DIR = os.getenv("GITHUB_WORKSPACE", os.path.dirname(os.path.abspath(__file__)))
-DATA_DIR = os.path.join(BASE_DIR, "kroger-data-pipeline", "src", "data")
+# Set up directory paths
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))  # Get `src/acquisition/`
+DATA_DIR = os.path.abspath(os.path.join(BASE_DIR, "..", "data"))  # Navigate to `src/data/`
 
-# ✅ Update file paths
+# # Set base directory dynamically
+# # Preserve for reference
+# BASE_DIR = os.getenv("GITHUB_WORKSPACE", os.path.dirname(os.path.abspath(__file__)))
+# DATA_DIR = os.path.join(BASE_DIR, "kroger-data-pipeline", "src", "data")
+
+# Update file paths
 PRODUCTS_FILE = os.path.join(DATA_DIR, "kroger_product_data.csv")
 LOCATION_FILE = os.path.join(DATA_DIR, "kroger_locations.csv")
 PRODUCT_API_LOG = os.path.join(DATA_DIR, "product_api_log.csv")
@@ -19,7 +24,7 @@ PRODUCT_API_LOG = os.path.join(DATA_DIR, "product_api_log.csv")
 # Ensure data folder exists in GitHub Actions runner
 if not os.path.exists(DATA_DIR):
     os.makedirs(DATA_DIR, exist_ok=True)
-    print(f"✅ Created missing data directory: {DATA_DIR}")
+    print(f"Created missing data directory: {DATA_DIR}")
 
 def fetch_and_filter_products(location_id):
     """Fetch products from Kroger API, filter relevant ones, and save to CSV."""
@@ -72,13 +77,13 @@ def fetch_and_filter_products(location_id):
                 "Date Retrieved": date_retrieved
             })
 
-    # ✅ Convert to DataFrame
+    # Convert to DataFrame
     products_df = pd.DataFrame(filtered_products)
 
-    # ✅ Apply Filtering Step (Using `filter_products`)
+    # Apply Filtering Step (Using `filter_products`)
     filtered_df = filter_products(products_df)
 
-    # ✅ Save to CSV with correct pathing
+    # Save to CSV with correct pathing
     save_to_csv(filtered_df, PRODUCTS_FILE)
 
     return filtered_df
@@ -119,7 +124,7 @@ def fetch_products_in_batches(batch_size=10):
         except Exception as e:
             print(f"\n❌ Error processing {location_id}: {str(e)}")
 
-    print(f"\n✅ Completed {processed_count} API calls in this run.")
+    print(f"\nCompleted {processed_count} API calls in this run.")
     
     return processed_locations
 
