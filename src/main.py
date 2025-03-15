@@ -50,7 +50,7 @@ def main(batch_size=10):
         update_tracker(location_id)  # Ensure updates are applied after processing
 
     # Step 5: Load & Filter Data
-    print("🛠️ Processing and filtering product data...")
+    print("Processing and filtering product data...")
     if os.path.exists(PRODUCTS_FILE):
         df = pd.read_csv(PRODUCTS_FILE)
         filtered_df = filter_products(df)
