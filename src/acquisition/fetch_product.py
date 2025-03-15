@@ -79,6 +79,13 @@ def fetch_and_filter_products(location_id):
 
     # Convert to DataFrame
     products_df = pd.DataFrame(filtered_products)
+    
+    # Explicitly set correct data types before saving
+    products_df = products_df.astype({
+        "Product ID": str,
+        "UPC": str,
+        "Location ID": str
+    }, errors="ignore")  # Prevent errors if some values can't be converted
 
     # Apply Filtering Step (Using `filter_products`)
     filtered_df = filter_products(products_df)
