@@ -25,19 +25,19 @@ term_project/
 ## 🛤️ Pipeline Execution Order
 To execute the pipeline in the correct sequence, run the following scripts in order:
 
-### **1️⃣ Data Acquisition (`src/acquisition/`)**
+### 1️⃣ Data Acquisition (`src/acquisition/`)
 - **`kroger_api.py`** – Handles authentication and API requests for product and location data.
 - **`fetch_product.py`** – Queries the Kroger API for grocery product data.
 - **`data_processing.py`** – Responsible for processing data retrieved from the Kroger API. .
 - **`tracking.py`** – Logs API calls to track data retrieval progress.
 
-### **2️⃣ Data Cleaning (`src/data_processing/`)**
+### 2️⃣ Data Cleaning (`src/data_processing/`)
 - **`census_cleaning.py`** – Processes and normalizes census data for ZIP-level demographic analysis.
 - **`location_cleaning.py`** – Cleans and standardizes store location data.
 - **`product_cleaning.py`** – Standardizes product descriptions, categories, and price fields.
 - **`zip_merge.py`** – Merges location and census data to create a unified dataset.
 
-### **3️⃣ Pipeline Execution (`src/`)**
+### 3️⃣ Pipeline Execution (`src/`)
 - **`main.py`** – Orchestrates the full acquisition pipeline by executing the above scripts in sequence.
   - Leverages GitHub  workflow actions for automation.   
 - **`run_processing.py`** – Runs the full data processing workflow, producing the final dataset.
@@ -47,16 +47,16 @@ The `notebooks/` folder contains Jupyter notebooks used for two purposes:
   1) Outline and explain automated  workflows
   2) Act as standalone sources for data acquisition or analysis
 
-### ** Location API and Census Acquisition Notebook**
+### Location API and Census Acquisition Notebook
 - **`location_&_census_acquisition.ipynb`** – Functional notebook  that was used for  the initial construction of raw Census and Location datasets.
 
-### ** Data Acquisition Notebook**
+### Data Acquisition Notebook
 - **`grocery_data_acquisition.ipynb`** – Documents the full pipeline for Product Data Acqusition that was refactored to modular py files.
 
-### ** Data Processing Notebooks**
+### Data Processing Notebooks
 - **`grocery_data_processing.ipynb`** – Documents the full pipeline for Cleaning, Aggregating and Constructing a final dataset that was refactored to modular py files.
 
-### ** Data Visualization Notebooks**
+### Data Visualization Notebooks
 - **`grocery_data_visualization.ipynb`** – Utilizes the final  dataset for initial EDA and Data Visualization.
 
 ## 🛠 How to Use This Repository
