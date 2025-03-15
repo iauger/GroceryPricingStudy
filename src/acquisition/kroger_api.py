@@ -1,16 +1,29 @@
 import os
+from dotenv import get_key, load_dotenv
 import requests
 from requests.exceptions import RequestException
 import base64
 import time
 from datetime import datetime, timedelta
 
-# Load API credentials from GitHub Actions environment variables
-CLIENT_ID = os.getenv("KROGER_CLIENT_ID")
-CLIENT_SECRET = os.getenv("KROGER_CLIENT_SECRET")
+# Set up directory paths
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))  # Get `src/acquisition/`
+DATA_DIR = os.path.join(BASE_DIR, "../data")  # Navigate to `src/data/`
+
+# Load environment variables
+ENV_FILE = os.path.join(DATA_DIR,"kroger_client_info.env")  # Define .env file path
+
+load_dotenv()
+CLIENT_ID = get_key(ENV_FILE, "KROGER_CLIENT_ID")
+CLIENT_SECRET = get_key(ENV_FILE, "KROGER_CLIENT_SECRET")
+
+# # Load API credentials from GitHub Actions environment variables
+# # Preserve in the event actions is restarted
+# CLIENT_ID = os.getenv("KROGER_CLIENT_ID")
+# CLIENT_SECRET = os.getenv("KROGER_CLIENT_SECRET")
 
 if not CLIENT_ID or not CLIENT_SECRET:
-    raise ValueError("❌ Missing Kroger API credentials in environment variables!")
+    raise ValueError("Missing Kroger API credentials in environment variables!")
 
 # Encode credentials for API authentication
 encoded_auth = base64.b64encode(f"{CLIENT_ID}:{CLIENT_SECRET}".encode()).decode()
@@ -41,13 +54,13 @@ def get_kroger_product_compact_token():
             os.environ["PRODUCT_COMPACT_ACCESS_TOKEN"] = access_token
             os.environ["PRODUCT_COMPACT_ACCESS_TOKEN_EXPIRATION"] = expiration_time.isoformat()
 
-            print("✅ New Token Retrieved!")
+            print("New Token Retrieved!")
         else:
-            raise RuntimeError(f"❌ Failed to retrieve token: {response.json()}")
+            raise RuntimeError(f"Failed to retrieve token: {response.json()}")
 
     return access_token
 
-# ✅ Ensure API base URL is set
+# Ensure API base URL is set
 PRODUCTS_API_URL = "https://api-ce.kroger.com/v1/products"
 
 def search_kroger_products(location_id, search_terms=["Eggs", "Bread"], limit=50):
@@ -55,7 +68,7 @@ def search_kroger_products(location_id, search_terms=["Eggs", "Bread"], limit=50
     
     token = get_kroger_product_compact_token()
     if not token:
-        print("❌ Failed to retrieve API token. Skipping product search.")
+        print("Failed to retrieve API token. Skipping product search.")
         return None
 
     headers = {"Authorization": f"Bearer {token}", "Accept": "application/json"}
@@ -80,26 +93,26 @@ def search_kroger_products(location_id, search_terms=["Eggs", "Bread"], limit=50
                     
                     if "data" in data:
                         for product in data["data"]:
-                            product["locationId"] = location_id  # ✅ Ensure location ID is stored
+                            product["locationId"] = location_id  # Ensure location ID is stored
                         all_products.extend(data["data"])
 
-                        # ✅ Check pagination limits
+                        # Check pagination limits
                         total_results = data.get("meta", {}).get("pagination", {}).get("total", 0)
                         if len(all_products) >= total_results or len(data["data"]) < limit:
                             break  # Stop pagination if we've fetched all results
 
-                        # ✅ Move to next batch
+                        # Move to next batch
                         start += limit
                         time.sleep(1)  # Prevent rate-limiting
                     else:
-                        print(f"⚠️ No more products found for '{term}' at location {location_id}.")
+                        print(f"No more products found for '{term}' at location {location_id}.")
                         break
                 else:
-                    print(f"❌ API Error ({response.status_code}) fetching '{term}': {response.json()}")
+                    print(f"API Error ({response.status_code}) fetching '{term}': {response.json()}")
                     break
 
             except RequestException as e:
-                print(f"❌ Network error while fetching '{term}' at location {location_id}: {e}")
+                print(f"Network error while fetching '{term}' at location {location_id}: {e}")
                 break  # Exit loop on request failure
 
     return all_products
