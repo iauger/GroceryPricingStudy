@@ -25,11 +25,9 @@ data/*.xlsx
 src/data/*
 # Allow specific datasets
 !src/data/final_dataset.csv
-!src/data/cleaned_census_data.csv
-!src/data/kroger_locations.csv
-!src/data/product_api_log.csv
-
-
-!git_data/final_dataset.csv
+src/data/cleaned_census_data.csv
+src/data/kroger_locations.csv
+src/data/product_api_log.csv
+git_data/final_dataset.csv
  
  

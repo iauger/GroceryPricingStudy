@@ -23,8 +23,13 @@ term_project/
 │── README.md              # Project documentation
 ```
 
-## 🛤️ Pipeline Execution Order
-Data Acquisition scripts can  be executed through main.py and Data Cleaing through run_processing.py
+## 🛤️ Script Execution Steps
+- Data Acquisition scripts can be executed through main.py.
+   - These scripts will call the Product API and store results.  
+- Data Cleaing scripts can be executed through run_processing.py.
+   - These scripts will clean, aggregate  and merge each individual  dataset (Location, Product, Census).
+- Location and Census  datasets can be generated within the Location API and Census Acquisition Notebook.
+   - This notebook can be refactored to emulate  the above workflows in the future.
 
 ### 1️⃣ Data Acquisition (`src/acquisition/`)
 - **`kroger_api.py`** – Handles authentication and API requests for product and location data.

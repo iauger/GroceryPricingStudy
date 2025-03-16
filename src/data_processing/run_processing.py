@@ -34,7 +34,7 @@ if __name__ == "__main__":
     
     # Step 2: Merge Data
     print("Merging data sources...")
-    run_script("merge_final.py")
+    run_script("zip_merge.py")
     
     # Step 3: Check if Final Dataset Exists
     DATA_FILE = os.path.join(BASE_DIR, "..", "data", "final_dataset.csv")
