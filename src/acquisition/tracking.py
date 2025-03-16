@@ -21,32 +21,32 @@ if not os.path.exists(DATA_DIR):
     os.makedirs(DATA_DIR, exist_ok=True)
     print(f"Created missing data directory: {DATA_DIR}")
 
-print(f"📂 Looking for location file in: {LOCATION_FILE}")
-print(f"📂 Looking for product log in: {PRODUCT_API_LOG}")
+print(f"Looking for location file in: {LOCATION_FILE}")
+print(f"Looking for product log in: {PRODUCT_API_LOG}")
 
 # Ensure 'data' folder exists
 if not os.path.exists(DATA_DIR):
-    raise FileNotFoundError(f"❌ Data directory is missing: {DATA_DIR}")
+    raise FileNotFoundError(f"Data directory is missing: {DATA_DIR}")
 
 # Ensure 'kroger_locations.csv' exists
 if not os.path.exists(LOCATION_FILE):
-    raise FileNotFoundError(f"❌ Missing location file: {LOCATION_FILE}")
+    raise FileNotFoundError(f"Missing location file: {LOCATION_FILE}")
 
 # Ensure 'PRODUCT_API_LOG.csv' exists
 if not os.path.exists(PRODUCT_API_LOG):
-    print("⚠️ Tracker file missing! Creating new file...")
+    print("Tracker file missing! Creating new file...")
     pd.DataFrame(columns=["Location ID", "Last Retrieved Date", "Successful Calls", "Needs Data"]).to_csv(PRODUCT_API_LOG, index=False)
 
 def load_location_tracker():
     """Loads the location tracker and initializes missing locations."""
     if not os.path.exists(LOCATION_FILE):
-        raise FileNotFoundError(f"❌ Missing location file: {LOCATION_FILE}")
+        raise FileNotFoundError(f"Missing location file: {LOCATION_FILE}")
 
     locations_df = pd.read_csv(LOCATION_FILE, dtype={"Location ID": str})
     location_ids = locations_df["Location ID"].astype(str).tolist()
 
     if os.path.exists(PRODUCT_API_LOG):
-        print("🔄 Loading existing product API tracker...")
+        print("Loading existing product API tracker...")
         tracker_df = pd.read_csv(PRODUCT_API_LOG, dtype={"Location ID": str})
         
         # Ensure column types are correct
@@ -54,7 +54,7 @@ def load_location_tracker():
         tracker_df["Successful Calls"] = tracker_df["Successful Calls"].astype(int)
         tracker_df["Needs Data"] = tracker_df["Needs Data"].astype(bool)
     else:
-        print("🆕 Creating new product tracker file...")
+        print("Creating new product tracker file...")
         tracker_df = pd.DataFrame({
             "Location ID": location_ids,
             "Last Retrieved Date": "",
@@ -75,7 +75,7 @@ def update_tracker(location_id):
     tracker_df.loc[tracker_df["Location ID"] == location_id, "Last Retrieved Date"] = today_str
     tracker_df.loc[tracker_df["Location ID"] == location_id, "Successful Calls"] += 1
 
-    print(f"📝 Updating tracker: {location_id} - {today_str}")
+    print(f"Updating tracker: {location_id} - {today_str}")
 
     tracker_df.to_csv(PRODUCT_API_LOG, index=False)  # Ensure changes are saved
 

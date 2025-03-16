@@ -33,7 +33,7 @@ def fetch_and_filter_products(location_id):
     product_results = search_kroger_products(location_id=location_id)
     
     if not product_results:
-        print(f"⚠️ No results found for Location ID {location_id}")
+        print(f"No results found for Location ID {location_id}")
         return None
 
     filtered_products = []
@@ -129,7 +129,7 @@ def fetch_products_in_batches(batch_size=10):
                 time.sleep(2)
                 
         except Exception as e:
-            print(f"\n❌ Error processing {location_id}: {str(e)}")
+            print(f"\nError processing {location_id}: {str(e)}")
 
     print(f"\nCompleted {processed_count} API calls in this run.")
     

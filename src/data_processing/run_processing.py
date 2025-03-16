@@ -1,7 +1,6 @@
 import os
 import subprocess
 
-# ✅ Get the correct path for scripts
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))  # Get directory of run_processing.py
 DATA_PROCESSING_DIR = os.path.join(BASE_DIR)  # Ensure correct path
 
