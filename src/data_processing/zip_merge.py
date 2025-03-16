@@ -5,8 +5,8 @@ from collections import Counter
 import geopandas as gpd
 
 # Set up directory paths
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))  # Get `src/data_processing/`
-DATA_DIR = os.path.abspath(os.path.join(BASE_DIR, "..", "data"))
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))  # Get `src/acquisition/`
+DATA_DIR = os.path.abspath(os.path.join(BASE_DIR, "..", "data"))  # Navigate to `src/data/`
 
 # Define file paths
 SHAPEFILE = os.path.join(DATA_DIR, "2020_ZCTA", "tl_2020_us_zcta520.shp")

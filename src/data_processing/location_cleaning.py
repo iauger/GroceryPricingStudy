@@ -5,27 +5,28 @@ import time
 from dotenv import get_key, load_dotenv
 
 # Set up directory paths
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))  # Get `src/data_processing/`
-DATA_DIR = os.path.join(BASE_DIR, "../data")  # Navigate to `src/data/`
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))  # Get `src/acquisition/`
+DATA_DIR = os.path.abspath(os.path.join(BASE_DIR, "..", "data"))  # Navigate to `src/data/`
 
 # Define file paths
 LOCATIONS_FILE = os.path.join(DATA_DIR, "kroger_locations.csv")
 CLEANED_LOCATIONS_FILE = os.path.join(DATA_DIR, "cleaned_location_data.csv")
+ENV_FILE = os.path.join(DATA_DIR, "kroger_client_info.env")  # Path to .env file
 
 # Load environment variables
-ENV_FILE = os.path.join(DATA_DIR,"kroger_client_info.env")  # Define .env file path
+if os.path.exists(ENV_FILE):
+    load_dotenv(ENV_FILE)  # Explicitly load the .env file
+else:
+    raise FileNotFoundError(f".env file not found at {ENV_FILE}")
 
-load_dotenv()
-GOOGLE_MAPS_API_KEY = get_key(ENV_FILE, "GOOGLE_MAP_API_KEY")
+# Retrieve the Google Maps API key
+GOOGLE_MAPS_API_KEY = os.getenv("GOOGLE_MAP_API_KEY")
 
-# Load Google Maps API Key from environment
-GMAPS_API_KEY = os.getenv("GOOGLE_MAPS_API_KEY")
-if not GMAPS_API_KEY:
-    raise ValueError("Google Maps API Key is missing! Set it as an environment variable.")
+if not GOOGLE_MAPS_API_KEY:
+    raise ValueError("Google Maps API Key is missing! Ensure it's set in the .env file.")
 
-GOOGLE_API_KEY = "GOOGLE_MAPS_API_KEY" 
-gmaps = googlemaps.Client(key=GOOGLE_API_KEY)
-
+# Pass the correct key to Google Maps Client
+gmaps = googlemaps.Client(key=GOOGLE_MAPS_API_KEY)
 # Define data types
 dtype_dict = {
     "Location ID": str,

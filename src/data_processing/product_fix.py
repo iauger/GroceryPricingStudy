@@ -2,8 +2,8 @@ import pandas as pd
 import os
 
 # Set up directory paths
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))  # Get `src/data_processing/`
-DATA_DIR = os.path.join(BASE_DIR, "../data")  # Navigate to `src/data/`
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))  # Get `src/acquisition/`
+DATA_DIR = os.path.abspath(os.path.join(BASE_DIR, "..", "data"))  # Navigate to `src/data/`
 
 # Define file paths
 PRODUCTS_FILE = os.path.join(DATA_DIR, "kroger_product_data.csv")
