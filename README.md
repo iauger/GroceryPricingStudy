@@ -1,7 +1,7 @@
 # Grocery Pricing Study
 
 ## 📌 Project Overview
-This repository contains a structured pipeline for collecting, cleaning, and analyzing grocery pricing data. The pipeline integrates data from multiple sources, including store locations, product prices, and demographic indicators. This guide provides an overview of each script, the execution order, and how to run the complete pipeline.
+This repository contains a structured pipeline for collecting, cleaning, and analyzing grocery pricing data from Kroger stores. The pipeline integrates data fetched from Kroger Location API, Kroger Product API and ACS data from the Census Bureau. This guide provides an overview of each script, the execution order, and how to run the complete pipeline.
 
 ## 🔍 Data Sources
 The project integrates multiple datasets:
@@ -16,9 +16,8 @@ term_project/
 │── src/                   # Source code for data processing
 │   ├── acquisition/       # Scripts for retrieving external data
 │   ├── data_processing/   # Scripts for cleaning and merging data
-│   ├── data/              # Folder for holding some data files including final_dataset.csv
-│── notebooks/             # Jupyter notebooks for exploratory analysis
-│── git_data/              # Contains final processed dataset (not tracked in Git)
+│   ├── data/              # Folder for holding final_dataset.csv
+│── notebooks/             # Jupyter notebooks for data acquisition and exploratory analysis
 │── .gitignore             # Ensures raw data files are not committed
 │── README.md              # Project documentation
 ```
@@ -81,18 +80,4 @@ The `notebooks/` folder contains Jupyter notebooks used for two purposes:
 - The dataset does not yet cover all Kroger locations.
 - Expanding coverage will enhance pricing accuracy and product availability tracking.
 
-## 🛠 How to Use This Repository
-1. **Clone the repository:**
-   ```bash
-   git clone https://github.com/iauger/GroceryPricingStudy.git
-   ```
-2. **Ensure dependencies are installed (if `requirements.txt` is available):**
-   ```bash
-   pip install -r requirements.txt
-   ```
-3. **Run the pipeline:**
-   ```bash
-   python src/main.py
-   ```
-4. **Explore Jupyter notebooks in `notebooks/` for additional data visualization and correlation analysis.**
 ---
