@@ -61,6 +61,21 @@ The `notebooks/` folder contains Jupyter notebooks used for two purposes:
 ### Data Visualization Notebooks
 - **`grocery_data_visualization.ipynb`** – Utilizes the final  dataset for initial EDA and Data Visualization.
 
+## ⚠️ Challenges & Limitations
+### Location Data Corrections
+- Initial data contained incorrect ZIP code assignments, leading to misassigned store locations.
+- Solution: Google Maps API was used to validate ZIP codes, latitude, and longitude.
+### Data Pipeline Automation
+- Initially developed in Jupyter Notebooks, later refactored into modular Python scripts.
+- Integrated with GitHub Actions for automated daily updates.
+### Current Limitation: Pipeline is temporarily suspended due to data size constraints, requiring a migration to BigQuery for better scalability.
+- Missing Product Data
+- Some locations lacked product data, leading to gaps in the dataset.
+- Locations with incomplete data were excluded from the final analysis.
+### Dataset Size & Completeness
+- The dataset does not yet cover all Kroger locations.
+- Expanding coverage will enhance pricing accuracy and product availability tracking.
+
 ## 🛠 How to Use This Repository
 1. **Clone the repository:**
    ```bash
